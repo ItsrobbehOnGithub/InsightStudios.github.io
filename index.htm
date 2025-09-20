@@ -6,15 +6,14 @@
 <title>Insight Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Global Styles */
   html, body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    height: 100%;
     background: linear-gradient(to bottom, #000000, #0d0d0d, #1a1a1a);
     color: #fff;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   body::before {
@@ -28,7 +27,6 @@
     z-index: 1;
     animation: subtleMove 40s infinite linear;
   }
-
   @keyframes subtleMove {
     0% { transform: translate(0, 0); }
     50% { transform: translate(50px, 50px); }
@@ -44,17 +42,20 @@
 
   header pre {
     margin: 0;
-    font-size: 10px;
-    line-height: 10px;
-    white-space: pre;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -1px;
+    padding: 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    display: inline-block;
     font-family: 'Courier New', monospace;
-    background: linear-gradient(90deg, #ff00c0, #8a2be2);
+    background: linear-gradient(90deg, #ff00c0, #8a2be2, #00c0ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: textGradient 5s infinite linear;
     overflow-x: auto;
   }
-
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -69,7 +70,6 @@
     font-size: 1.1rem;
     position: relative;
     z-index: 2;
-    letter-spacing: 0.1px;
   }
 
   nav a {
@@ -90,31 +90,62 @@
     bottom: -5px;
     left: 0;
   }
+  nav a:hover::after { width: 100%; }
 
-  nav a:hover::after {
-    width: 100%;
+  .hero {
+    padding: 100px 20px 60px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+    margin: 0 0 20px;
+    background: linear-gradient(90deg, #ff0080, #ff00c0, #00c0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowPulse 3s infinite ease-in-out;
+  }
+  @keyframes glowPulse {
+    0%,100% { text-shadow: 0 0 10px rgba(255,0,128,0.7); }
+    50% { text-shadow: 0 0 25px rgba(0,192,255,0.9); }
+  }
+  .hero p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+    animation: fadeInUp 2s ease forwards;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   section {
-    padding: 60px 20px;
+    padding: 80px 20px;
     position: relative;
     z-index: 2;
     text-align: center;
   }
-
   section h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    letter-spacing: 0.1px;
+    background: linear-gradient(90deg, #ff00c0, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floaty 6s infinite ease-in-out;
   }
-
+  @keyframes floaty {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
   section p {
     font-size: 1.1rem;
     line-height: 1.8;
     max-width: 800px;
     margin: 0 auto;
-    opacity: 0.9;
-    letter-spacing: 0.1px;
+    opacity: 0.85;
   }
 
   .games {
@@ -122,8 +153,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
+    padding: 40px 0 60px;
   }
-
   .game {
     width: 220px;
     height: 330px;
@@ -133,26 +164,18 @@
     cursor: pointer;
     position: relative;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
+    animation: fadeInUp 1.5s ease forwards;
   }
-
   .game:hover {
     transform: scale(1.08);
     box-shadow: 0 20px 50px rgba(0,0,0,0.7);
   }
+  .game img { width: 100%; height: 100%; object-fit: cover; }
 
-  .game img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Sidebar Styles */
   .sidebar {
     position: fixed;
-    top: 0;
-    left: -380px;
-    width: 380px;
-    height: 100%;
+    top: 0; left: -380px;
+    width: 380px; height: 100%;
     background: rgba(10,10,10,0.97);
     padding: 40px 30px;
     box-shadow: 10px 0 60px rgba(0,0,0,0.7);
@@ -160,112 +183,36 @@
     z-index: 3;
     overflow-y: auto;
   }
-
-  .sidebar.active {
-    left: 0;
-  }
-
-  .sidebar .cover {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 20px;
-  }
-
-  .sidebar h2 {
-    margin: 0 0 10px 0;
-    font-size: 2.2rem;
-    text-align: center;
-    letter-spacing: 0.1px;
-  }
-
-  .sidebar .release-date {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    opacity: 0.8;
-    text-align: center;
-    letter-spacing: 0.1px;
-  }
-
-  .sidebar p {
-    line-height: 1.8;
-    margin: 0 0 25px 0;
-    font-size: 1.05rem;
-    opacity: 0.9;
-    text-align: justify;
-    letter-spacing: 0.1px;
-  }
-
-  .sidebar .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
-    margin: 25px 0;
-  }
-
-  .sidebar .gallery img {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s;
-  }
-
-  .sidebar .gallery img:hover {
-    transform: scale(1.05);
-  }
-
-  .sidebar .trailer {
-    margin: 30px 0;
-  }
-
-  .sidebar iframe {
-    width: 100%;
-    height: 220px;
-    border: none;
-    border-radius: 12px;
-  }
+  .sidebar.active { left: 0; }
+  .sidebar h2 { margin: 0 0 10px; font-size: 2.2rem; text-align: center; letter-spacing: 0.5px; }
+  .sidebar img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
+  .sidebar p { line-height: 1.8; text-align: left; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .sidebar .release { font-style: italic; opacity: 0.7; margin-bottom: 15px; }
+  .sidebar .screenshots { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .sidebar .screenshots img { width: 45%; border-radius: 10px; }
 
   .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: all 0.3s;
-  }
-
-  .close-btn:hover {
-    background: #ff0080;
-    border-color: #ff0080;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 10px 25px;
-    background: #ff0080;
-    color: #fff;
-    border-radius: 50px;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: background 0.3s;
-    letter-spacing: 0.1px;
-  }
-
-  .btn:hover {
-    background: #ff00c0;
+    position: absolute; top: 15px; right: 15px;
+    background: transparent; border: 2px solid #fff; color: #fff;
+    border-radius: 50%; width: 36px; height: 36px;
+    cursor: pointer; font-weight: bold; font-size: 1.1rem;
   }
 
   footer {
     text-align: center;
-    padding: 50px 20px;
+    padding: 50px 20px 20px;
     font-size: 1rem;
     opacity: 0.6;
-    letter-spacing: 0.1px;
+  }
+  footer .version { margin-top: 10px; font-size: 0.9rem; opacity: 0.5; }
+
+  @media (max-width: 700px) {
+    .sidebar { width: 92vw; left: -92vw; }
+    .sidebar.active { left: 0; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.1rem; }
+    .game { width: 45%; height: 280px; }
+    .sidebar .screenshots img { width: 100%; }
   }
 </style>
 </head>
@@ -291,82 +238,76 @@
   <a onclick="openPanel('contact')">Contact</a>
 </nav>
 
+<div class="hero">
+  <h1>Welcome to Insight Studios</h1>
+  <p>We are creators of immersive worlds, breathtaking visuals, and stories that move players. Explore our journey, discover our games, and see what makes us unique.</p>
+</div>
+
 <section class="games" id="games">
-  <div class="game" onclick="openSidebar('Game 1', 'This is the first game placeholder with professional description and features.', '2025-09-01')">
+  <div class="game" onclick="openSidebar('Game 1', 'This is the first game placeholder with professional description and features.', '2025-09-01', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 1">
   </div>
-  <div class="game" onclick="openSidebar('Game 2', 'This is the second game placeholder with cinematic presentation.', '2026-03-15')">
+  <div class="game" onclick="openSidebar('Game 2', 'This is the second game placeholder with cinematic presentation.', '2026-03-15', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 2">
   </div>
-  <div class="game" onclick="openSidebar('Game 3', 'This is the third game placeholder with immersive description.', '2026-11-20')">
+  <div class="game" onclick="openSidebar('Game 3', 'This is the third game placeholder with immersive description.', '2026-11-20', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 3">
   </div>
 </section>
 
-<section class="about" id="about">
-  <h2>About Insight Studios</h2>
-  <p>Insight Studios creates immersive and visually stunning gaming experiences. Our focus is on innovative gameplay, cinematic storytelling, and technical excellence to craft worlds that captivate players and push the boundaries of interactive entertainment.</p>
+<section>
+  <h2>Our Mission</h2>
+  <p>At Insight Studios, our mission is to craft unforgettable gaming experiences that push the boundaries of creativity and technology. Every project we develop is driven by passion, innovation, and a relentless pursuit of excellence. Our games combine story, art, and gameplay into seamless experiences. Players can explore, interact, and immerse themselves in worlds we carefully design to be both visually stunning and emotionally resonant.</p>
 </section>
 
-<section class="contact" id="contact">
-  <h2>Contact Us</h2>
-  <p>Reach out to us via email at <a href="mailto:Contact-Insight@proton.me">Contact-Insight@proton.me</a> for inquiries, collaborations, or general feedback.</p>
-  <a class="btn" href="mailto:Contact-Insight@proton.me">Email Us</a>
+<section>
+  <h2>Vision for the Future</h2>
+  <p>We believe the future of gaming lies in immersive storytelling and interactive design. With cutting-edge tools and artistic vision, we aim to shape new frontiers in the gaming industry, where every player feels part of something larger than themselves. Our commitment to technical excellence ensures smooth performance, while our dedication to narrative depth makes every journey unforgettable. Insight Studios is where imagination meets innovation.</p>
 </section>
 
 <div class="sidebar" id="sidebar">
   <button class="close-btn" onclick="closeSidebar()">×</button>
-  <img id="sidebar-cover" class="cover" src="" alt="Cover">
   <h2 id="sidebar-title"></h2>
-  <div class="release-date" id="sidebar-release"></div>
+  <img id="sidebar-cover" src="" alt="Cover Image">
   <p id="sidebar-content"></p>
-  <div class="gallery" id="sidebar-gallery"></div>
-  <div class="trailer" id="sidebar-trailer">
-    <iframe id="sidebar-video" src="" allowfullscreen></iframe>
-  </div>
+  <p class="release" id="sidebar-release"></p>
+  <div class="screenshots" id="sidebar-screenshots"></div>
 </div>
 
-<footer>© 2025 Insight Studios. All rights reserved.</footer>
+<footer>
+  © 2025 Insight Studios. All rights reserved.
+  <div class="version">Website Version V1.1</div>
+</footer>
 
 <script>
-function openSidebar(title, content, releaseDate = '') {
+function openSidebar(title, content, releaseDate = '', screenshots = []) {
   document.getElementById('sidebar-title').innerText = title;
   document.getElementById('sidebar-content').innerText = content;
-  document.getElementById('sidebar-release').innerText = releaseDate ? "Release Date: " + releaseDate : "";
+  document.getElementById('sidebar-release').innerText = releaseDate ? `Release Date: ${releaseDate}` : '';
+  document.getElementById('sidebar-cover').src = document.querySelector(`.game img[alt="${title}"]`)?.src || '';
   
-  // Cover image for games, optional for About/Contact
-  document.getElementById('sidebar-cover').src = releaseDate ? 
-    `https://via.placeholder.com/800x400.png?text=${title}+Cover` : '';
-    
-  const gallery = document.getElementById('sidebar-gallery');
-  gallery.innerHTML = '';
+  const screenshotContainer = document.getElementById('sidebar-screenshots');
+  screenshotContainer.innerHTML = '';
+  screenshots.forEach(url => {
+    const img = document.createElement('img');
+    img.src = url;
+    screenshotContainer.appendChild(img);
+  });
   
-  if(releaseDate) {
-    for (let i = 1; i <= 6; i++) {
-      const img = document.createElement('img');
-      img.src = `https://via.placeholder.com/400x225.png?text=${title}+Screenshot+${i}`;
-      img.alt = title + ' Screenshot ' + i;
-      gallery.appendChild(img);
-    }
-  }
-
-  document.getElementById('sidebar-video').src = releaseDate ? "https://www.youtube.com/embed/dQw4w9WgXcQ" : "";
   document.getElementById('sidebar').classList.add('active');
 }
 
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('active');
-  document.getElementById('sidebar-video').src = "";
 }
 
 function openPanel(type) {
   if(type === 'about') {
-    openSidebar('About Insight Studios', 'Insight Studios creates immersive and visually stunning gaming experiences. Our focus is on innovative gameplay, cinematic storytelling, and technical excellence to craft worlds that captivate players and push the boundaries of interactive entertainment.');
+    openSidebar('About Insight Studios', 'Insight Studios creates immersive and visually stunning gaming experiences. Our focus is on innovative gameplay, cinematic storytelling, and technical excellence to craft worlds that captivate players.');
   } else if(type === 'contact') {
-    openSidebar('Contact Us', 'Reach out to us via email at Contact-Insight@proton.me
-    for inquiries, collaborations, or general feedback.');
+    openSidebar('Contact Us', 'Reach out to us via email at Contact-Insight@proton.me for inquiries, collaborations, or general feedback.');
   } else if(type === 'games') {
-    openSidebar('Games', 'Click on any game below to see more details.');
+    openSidebar('Games', 'Click on any game cover below to see more details about it.');
   }
 }
 </script>
