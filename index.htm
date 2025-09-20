@@ -17,7 +17,7 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
 
-  /* Background animation for desktop */
+  /* Background animation */
   body::before {
     content: '';
     position: fixed;
@@ -55,13 +55,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: textGradient 5s infinite linear;
-    overflow-x: auto;
-    white-space: pre-wrap;
+    overflow-x: auto;  /* horizontal scroll if needed */
+    white-space: pre;  /* prevent wrapping */
   }
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+  }
+  @media (max-width: 700px) {
+    header pre {
+      font-size: clamp(4px, 2vw, 8px);
+      letter-spacing: -0.5px;
+    }
   }
 
   /* Navigation */
@@ -164,12 +170,12 @@
   /* Sidebar */
   .sidebar {
     position: fixed;
-    top: 0; left: -420px; /* wider sidebar */
-    width: 420px; 
+    top: 0; left: -420px;
+    width: 420px;
     height: 100vh;
     background: rgba(0,0,0,0.65);
     backdrop-filter: blur(15px);
-    padding: 50px 40px; /* more padding */
+    padding: 50px 40px;
     box-shadow: 12px 0 60px rgba(0,0,0,0.8);
     transition: left 0.6s ease;
     z-index: 3;
@@ -285,22 +291,12 @@ function openSidebar(title, content, releaseDate = '', screenshots = []) {
   });
 
   document.getElementById('sidebar').classList.add('active');
-
-  // Lock main page scroll
-  document.body.style.top = `-${window.scrollY}px`;
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden'; // lock main page scroll
 }
 
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('active');
-
-  // Restore main page scroll
-  const scrollY = document.body.style.top;
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  document.body.style.overflow = ''; // restore main page scroll
 }
 
 function openPanel(type) {
