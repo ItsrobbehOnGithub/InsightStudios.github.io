@@ -1,3 +1,3 @@
 # InsightStudios.github.io
-Insight-Studios.co.uk
-Website version V1.2.
+[![Insight-Studios](https://img.shields.io/badge/Insight--Studios-Visit-blue)](https://insight-studios.co.uk)
+Website version V1.1.
