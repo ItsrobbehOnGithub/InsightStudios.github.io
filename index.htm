@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Insight Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -17,7 +17,6 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
 
-  /* Subtle animated background */
   body::before {
     content: '';
     position: fixed;
@@ -30,29 +29,9 @@
     animation: subtleMove 40s infinite linear;
     will-change: transform;
   }
-  @keyframes subtleMove {
-    0%, 100% { transform: translate(0,0); }
-    50% { transform: translate(10px,10px); }
-  }
+  @keyframes subtleMove { 0%,100% { transform: translate(0,0); } 50% { transform: translate(10px,10px); } }
 
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-  }
-  .logo-container {
-    position: relative;
-    display: inline-block;
-    padding: 15px 20px;
-    border: 2px solid rgba(255,255,255,0.1);
-    border-radius: 15px;
-    background: rgba(255,255,255,0.05);
-    max-height: 80vh;
-    overflow: auto;
-  }
+  header { display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; z-index: 2; }
   .logo-container pre {
     margin: 0;
     font-size: clamp(5px, 1vw, 10px);
@@ -65,27 +44,10 @@
     animation: textGradient 5s infinite linear;
     white-space: pre;
   }
-  @keyframes textGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+  @keyframes textGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 20px 0 40px 0;
-    font-size: 1.1rem;
-    position: relative;
-    z-index: 2;
-  }
-  nav a {
-    text-decoration: none;
-    color: #fff;
-    position: relative;
-    cursor: pointer;
-  }
+  nav { display: flex; justify-content: center; gap: 40px; margin: 20px 0 40px 0; font-size: 1.1rem; position: relative; z-index: 2; }
+  nav a { text-decoration: none; color: #fff; position: relative; cursor: pointer; }
   nav a::after {
     content: '';
     display: block;
@@ -99,12 +61,7 @@
   }
   nav a:hover::after { width: 100%; }
 
-  .hero {
-    padding: 100px 20px 60px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-  }
+  .hero { padding: 100px 20px 60px; text-align: center; position: relative; z-index: 2; }
   .hero h1 {
     font-size: 3.5rem;
     margin: 0 0 20px;
@@ -113,24 +70,13 @@
     -webkit-text-fill-color: transparent;
     animation: glowPulse 3s infinite ease-in-out;
   }
-  @keyframes glowPulse {
-    0%,100% { text-shadow: 0 0 10px rgba(255,0,128,0.7); }
-    50% { text-shadow: 0 0 25px rgba(0,192,255,0.9); }
-  }
-  .hero p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.9;
-    animation: fadeInUp 2s ease forwards;
-  }
+  @keyframes glowPulse { 0%,100% { text-shadow: 0 0 10px rgba(255,0,128,0.7); } 50% { text-shadow: 0 0 25px rgba(0,192,255,0.9); } }
+  .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; opacity: 0.9; animation: fadeInUp 2s ease forwards; }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Liquid Glass Boxes */
   .liquid-box {
     background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
     padding: 35px 25px;
@@ -152,29 +98,11 @@
     pointer-events: none;
     animation: glassShimmer 4s infinite linear;
   }
-  @keyframes glassShimmer {
-    0% { transform: rotate(25deg) translate(-100%, -100%); }
-    100% { transform: rotate(25deg) translate(100%, 100%); }
-  }
-  .liquid-box:hover {
-    transform: translateY(-5px);
-    box-shadow: inset 0 0 50px rgba(255,255,255,0.08), 0 15px 60px rgba(0,0,0,0.5);
-  }
-  .liquid-box h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    background: linear-gradient(90deg, #ff00c0, #8a2be2, #00c0ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .liquid-box p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    opacity: 0.9;
-    color: #e0e0e0;
-  }
+  @keyframes glassShimmer { 0% { transform: rotate(25deg) translate(-100%, -100%); } 100% { transform: rotate(25deg) translate(100%, 100%); } }
+  .liquid-box:hover { transform: translateY(-5px); box-shadow: inset 0 0 50px rgba(255,255,255,0.08), 0 15px 60px rgba(0,0,0,0.5); }
+  .liquid-box h3 { font-size: 2rem; margin-bottom: 15px; background: linear-gradient(90deg, #ff00c0, #8a2be2, #00c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .liquid-box p { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; color: #e0e0e0; }
 
-  /* Games Section */
   .games {
     display: flex;
     flex-wrap: wrap;
@@ -182,6 +110,7 @@
     gap: 40px;
     padding: 40px 0 60px;
   }
+
   .game {
     width: 220px;
     height: 330px;
@@ -192,15 +121,24 @@
     position: relative;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     animation: fadeInUp 1.5s ease forwards;
+    perspective: 1000px;
+    transform-style: preserve-3d;
   }
-  .game:hover { transform: scale(1.08); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
-  .game img { width: 100%; height: 100%; object-fit: cover; }
+  .game img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+    transform-origin: center;
+    backface-visibility: hidden;
+  }
 
-  /* Sidebar */
   .sidebar {
     position: fixed;
-    top: 0; left: -450px;
+    top: 0;
+    left: -100vw;
     width: 450px;
+    max-width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.65);
     backdrop-filter: blur(15px);
@@ -211,17 +149,72 @@
     overflow-y: auto;
   }
   .sidebar.active { left: 0; }
-  .sidebar h2 { margin: 0 0 15px; font-size: 2.4rem; text-align: center; letter-spacing: 0.5px; }
-  .sidebar img { width: 100%; border-radius: 15px; margin-bottom: 25px; }
-  .sidebar p { line-height: 1.9; text-align: left; letter-spacing: 0.5px; margin-bottom: 12px; }
-  .sidebar .release { font-style: italic; opacity: 0.75; margin-bottom: 20px; }
-  .sidebar .screenshots { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .sidebar .screenshots img { width: 45%; border-radius: 10px; }
+
+  #sidebar.neon {
+    background: rgba(0,0,0,0.85);
+    animation: flickerBorder 2s infinite alternate;
+  }
+  #sidebar.neon #sidebar-title {
+    color: #ff00c0;
+    text-shadow: 0 0 5px #ff00c0, 0 0 10px #ff0080, 0 0 20px #00c0ff;
+    animation: textPulse 2s infinite alternate;
+  }
+  #sidebar.neon #sidebar-content-wrap {
+    border: 2px solid #ff00c0;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 0 20px #ff00c0, 0 0 40px #ff0080, 0 0 60px #00c0ff;
+    position: relative;
+    overflow: hidden;
+  }
+  #sidebar.neon #sidebar-content-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+    animation: moveParticles 6s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes textPulse {
+    0% { text-shadow: 0 0 5px #ff00c0, 0 0 10px #ff0080, 0 0 20px #00c0ff; }
+    50% { text-shadow: 0 0 15px #ff00c0, 0 0 25px #ff0080, 0 0 40px #00c0ff; }
+    100% { text-shadow: 0 0 10px #ff00c0, 0 0 20px #ff0080, 0 0 30px #00c0ff; }
+  }
+  @keyframes moveParticles { 0% { background-position: 0 0; } 100% { background-position: 100px 100px; } }
+  @keyframes flickerBorder {
+    0% { box-shadow: 0 0 20px #ff00c0, 0 0 40px #ff0080, 0 0 60px #00c0ff; }
+    50% { box-shadow: 0 0 30px #ff00c0, 0 0 60px #ff0080, 0 0 80px #00c0ff; }
+    100% { box-shadow: 0 0 25px #ff00c0, 0 0 50px #ff0080, 0 0 70px #00c0ff; }
+  }
+
   .close-btn {
     position: absolute; top: 15px; right: 15px;
     background: transparent; border: 2px solid #fff; color: #fff;
     border-radius: 50%; width: 36px; height: 36px;
     cursor: pointer; font-weight: bold; font-size: 1.1rem;
+  }
+
+  #sidebar-cover {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.22s ease;
+    transform-origin: center;
+    display: block;
+  }
+  #sidebar-cover:hover {
+    transform: scale(0.96);
+  }
+
+  /* Special tiny/dim text for the requested release phrase */
+  .release .tiny-dim {
+    color: rgba(255,255,255,0.38); /* very faint gray, barely visible on black */
+    font-size: 1m;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: 0px;
   }
 
   footer { text-align: center; padding: 50px 20px 20px; font-size: 1rem; opacity: 0.6; }
@@ -265,42 +258,46 @@
   <p>We’re a bold startup building playful, immersive worlds that surprise, delight, and challenge players. Explore our journey and jump into our universe!</p>
 </div>
 
-<!-- Liquid Glass Startup Boxes -->
 <section>
   <div class="liquid-box">
     <h3>Bold Ideas, Fast</h3>
-    <p>We’re a scrappy, hungry team turning wild concepts into playable experiences. Experimentation, creativity, and speed are our core fuel.</p>
+    <p>We’re an abused, unpaid team turning wild concepts into playable experiences. Experimentation, creativity, and speed are our core fuel.</p>
   </div>
-
   <div class="liquid-box">
     <h3>Design Meets Play</h3>
     <p>Our games combine stunning visuals and intuitive mechanics to keep players engaged, entertained, and coming back for more.</p>
   </div>
-
   <div class="liquid-box">
     <h3>Community-Driven</h3>
     <p>Player energy drives our growth. Feedback, ideas, and collaboration help us shape worlds that feel alive and evolving.</p>
   </div>
 </section>
 
-<!-- Games Section -->
 <section class="games" id="games">
-  <div class="game" onclick="openSidebar('Game 1', 'Our first game is a playground for bold ideas and experimentation.', '2025-09-01', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
-    <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 1">
+  <div class="game" onclick="openSidebar(
+    'Top-Down Heist',
+    'A lone mastermind orchestrates daring robberies in massive, high-security banks. Can you plan and execute the perfect heist without leaving a trace?',
+    'Coming Soon',
+    ['https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg'],
+    'https://www.youtube.com/embed/rbFoRH2deeY'
+  )">
+    <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Top-Down Heist">
   </div>
-  <div class="game" onclick="openSidebar('Game 2', 'A cinematic, visually stunning experience with intuitive gameplay.', '2026-03-15', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
+  <div class="game" onclick="openSidebar('Game 2', 'A cinematic, visually stunning experience with intuitive gameplay.', '2026-03-15')">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 2">
   </div>
-  <div class="game" onclick="openSidebar('Game 3', 'Our third game immerses players in vibrant, evolving worlds.', '2026-11-20', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
+  <div class="game" onclick="openSidebar('Game 3', 'Our third game immerses players in vibrant, evolving worlds.', '2026-11-20')">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 3">
   </div>
 </section>
 
-<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
   <button class="close-btn" onclick="closeSidebar()">×</button>
   <h2 id="sidebar-title"></h2>
-  <img id="sidebar-cover" src="" alt="Cover Image">
+  <div class="neon-border" id="sidebar-content-wrap">
+    <img id="sidebar-cover" src="" alt="Cover Image" style="width:100%; border-radius:10px; margin-bottom:15px;">
+    <iframe id="sidebar-video" width="100%" height="220" src="" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
   <p id="sidebar-content"></p>
   <p class="release" id="sidebar-release"></p>
   <div class="screenshots" id="sidebar-screenshots"></div>
@@ -312,26 +309,39 @@
 </footer>
 
 <script>
-function openSidebar(title, content, releaseDate = '', screenshots = []) {
-  document.getElementById('sidebar-title').innerText = title;
-  document.getElementById('sidebar-content').innerText = content;
-  document.getElementById('sidebar-release').innerText = releaseDate ? `Release Date: ${releaseDate}` : '';
-  document.getElementById('sidebar-cover').src = document.querySelector(`.game img[alt="${title}"]`)?.src || '';
+const sidebar = document.getElementById('sidebar');
+const sidebarTitle = document.getElementById('sidebar-title');
+const sidebarContent = document.getElementById('sidebar-content');
+const sidebarRelease = document.getElementById('sidebar-release');
+const sidebarCover = document.getElementById('sidebar-cover');
+const sidebarVideo = document.getElementById('sidebar-video');
+const games = document.querySelectorAll('.game');
 
-  const screenshotContainer = document.getElementById('sidebar-screenshots');
-  screenshotContainer.innerHTML = '';
-  screenshots.forEach(url => {
-    const img = document.createElement('img');
-    img.src = url;
-    screenshotContainer.appendChild(img);
-  });
+function openSidebar(title, content, releaseDate = '', screenshots = [], videoUrl = '') {
+  sidebarTitle.innerText = title;
+  sidebarContent.innerText = content;
 
-  document.getElementById('sidebar').classList.add('active');
+  if (title === "Top-Down Heist") {
+    // Fixed: "whenever I feel like it" immediately after "Eventually"
+    sidebarRelease.innerHTML = 'release date: <s>coming soon</s> Eventually <span class="tiny-dim">whenever I feel like it</span>';
+    sidebar.classList.add('active', 'neon');
+    sidebarCover.src = screenshots.length > 0 ? screenshots[0] : '';
+    sidebarVideo.src = videoUrl ? videoUrl : '';
+  } else {
+    sidebarRelease.innerText = releaseDate ? `Release Date: ${releaseDate}` : '';
+    sidebar.classList.add('active');
+    sidebar.classList.remove('neon');
+    sidebarCover.src = '';
+    sidebarVideo.src = '';
+  }
+
   document.body.style.overflow = 'hidden';
 }
 
 function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('active');
+  sidebar.classList.remove('active', 'neon');
+  sidebarVideo.src = '';
+  sidebarCover.src = '';
   document.body.style.overflow = '';
 }
 
@@ -344,6 +354,32 @@ function openPanel(type) {
     openSidebar('Games', 'Click on a game below to explore more about it!');
   }
 }
+
+games.forEach(game => {
+  const img = game.querySelector('img');
+
+  game.addEventListener('mousemove', e => {
+    const rect = game.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 18;
+    const rotateY = ((x - centerX) / centerX) * 18;
+
+    game.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
+
+    const translateX = (x - centerX) / 10;
+    const translateY = (y - centerY) / 10;
+    img.style.transform = `scale(1.35) translate(${translateX}px, ${translateY}px)`;
+  });
+
+  game.addEventListener('mouseleave', () => {
+    game.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    img.style.transform = 'scale(1) translate(0,0)';
+  });
+});
 </script>
 
 </body>
