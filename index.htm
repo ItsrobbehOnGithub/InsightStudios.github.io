@@ -17,6 +17,7 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
 
+  /* Subtle animated background */
   body::before {
     content: '';
     position: fixed;
@@ -33,7 +34,6 @@
     0%, 100% { transform: translate(0,0); }
     50% { transform: translate(10px,10px); }
   }
-  @media (max-width: 700px) { body::before { display: none; } }
 
   header {
     display: flex;
@@ -43,18 +43,16 @@
     position: relative;
     z-index: 2;
   }
-
   .logo-container {
     position: relative;
     display: inline-block;
     padding: 15px 20px;
-    border: 2px solid rgba(0,0,0,0.4);
+    border: 2px solid rgba(255,255,255,0.1);
     border-radius: 15px;
-    background: rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.05);
     max-height: 80vh;
     overflow: auto;
   }
-
   .logo-container pre {
     margin: 0;
     font-size: clamp(5px, 1vw, 10px);
@@ -67,49 +65,10 @@
     animation: textGradient 5s infinite linear;
     white-space: pre;
   }
-
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-  }
-
-  /* Mobile-only overlay */
-  .mobile-logo-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 300px;
-    height: 90%;
-    pointer-events: none;
-    background: rgba(0,0,0,0.25);
-    border-radius: 15px;
-    z-index: 3;
-    backdrop-filter: blur(8px);
-    overflow: hidden;
-  }
-  .mobile-logo-overlay img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-  }
-
-  @media (max-width: 700px) {
-    .logo-container {
-      padding: 10px 12px;
-      max-height: 50vh;
-    }
-    .logo-container pre {
-      font-size: clamp(3px, 1.5vw, 6px);
-      letter-spacing: -0.3px;
-    }
-    .mobile-logo-overlay {
-      display: block;
-    }
   }
 
   nav {
@@ -167,23 +126,55 @@
   }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-  section {
-    padding: 80px 20px;
+  /* Liquid Glass Boxes */
+  .liquid-box {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 35px 25px;
+    margin: 30px auto;
+    max-width: 900px;
+    text-align: left;
+    box-shadow: inset 0 0 40px rgba(255,255,255,0.05), 0 10px 40px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    z-index: 2;
-    text-align: center;
+    overflow: hidden;
   }
-  section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, #ff00c0, #8a2be2);
+  .liquid-box::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+    transform: rotate(25deg);
+    pointer-events: none;
+    animation: glassShimmer 4s infinite linear;
+  }
+  @keyframes glassShimmer {
+    0% { transform: rotate(25deg) translate(-100%, -100%); }
+    100% { transform: rotate(25deg) translate(100%, 100%); }
+  }
+  .liquid-box:hover {
+    transform: translateY(-5px);
+    box-shadow: inset 0 0 50px rgba(255,255,255,0.08), 0 15px 60px rgba(0,0,0,0.5);
+  }
+  .liquid-box h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #ff00c0, #8a2be2, #00c0ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: floaty 6s infinite ease-in-out;
   }
-  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  section p { font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto; opacity: 0.85; }
+  .liquid-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    color: #e0e0e0;
+  }
 
+  /* Games Section */
   .games {
     display: flex;
     flex-wrap: wrap;
@@ -205,6 +196,7 @@
   .game:hover { transform: scale(1.08); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
   .game img { width: 100%; height: 100%; object-fit: cover; }
 
+  /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0; left: -450px;
@@ -236,13 +228,11 @@
   footer .version { margin-top: 10px; font-size: 0.9rem; opacity: 0.5; }
 
   @media (max-width: 700px) {
-    .sidebar { width: 100vw; left: -100vw; padding: 20px; }
-    .sidebar.active { left: 0; }
     .hero h1 { font-size: 2.5rem; }
     .hero p { font-size: 1.1rem; }
     .game { width: 45%; height: 280px; }
-    .sidebar .screenshots img { width: 100%; }
-    .hero h1, section h2 { animation: none !important; text-shadow: none; }
+    .sidebar { width: 100vw; left: -100vw; padding: 20px; }
+    .sidebar.active { left: 0; }
   }
 </style>
 </head>
@@ -261,9 +251,6 @@
  ▒ ░   ░   ░ ░ ░  ░  ░   ▒ ░░ ░   ░  ░  ░░ ░  ░      ░  ░  ░    ░       ░░░ ░ ░  ░ ░  ░  ▒ ░░ ░ ░ ▒  ░  ░  ░  
  ░           ░       ░   ░        ░  ░  ░  ░               ░              ░        ░     ░      ░ ░        ░  
     </pre>
-    <div class="mobile-logo-overlay">
-      <img src="https://ibb.co/VWgPTZ26" alt="Mobile Overlay">
-    </div>
   </div>
 </header>
 
@@ -275,31 +262,41 @@
 
 <div class="hero">
   <h1>Welcome to Insight Studios</h1>
-  <p>We are creators of immersive worlds, breathtaking visuals, and stories that move players. Explore our journey, discover our games, and see what makes us unique.</p>
+  <p>We’re a bold startup building playful, immersive worlds that surprise, delight, and challenge players. Explore our journey and jump into our universe!</p>
 </div>
 
+<!-- Liquid Glass Startup Boxes -->
+<section>
+  <div class="liquid-box">
+    <h3>Bold Ideas, Fast</h3>
+    <p>We’re a scrappy, hungry team turning wild concepts into playable experiences. Experimentation, creativity, and speed are our core fuel.</p>
+  </div>
+
+  <div class="liquid-box">
+    <h3>Design Meets Play</h3>
+    <p>Our games combine stunning visuals and intuitive mechanics to keep players engaged, entertained, and coming back for more.</p>
+  </div>
+
+  <div class="liquid-box">
+    <h3>Community-Driven</h3>
+    <p>Player energy drives our growth. Feedback, ideas, and collaboration help us shape worlds that feel alive and evolving.</p>
+  </div>
+</section>
+
+<!-- Games Section -->
 <section class="games" id="games">
-  <div class="game" onclick="openSidebar('Game 1', 'This is the first game placeholder with professional description and features.', '2025-09-01', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
+  <div class="game" onclick="openSidebar('Game 1', 'Our first game is a playground for bold ideas and experimentation.', '2025-09-01', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 1">
   </div>
-  <div class="game" onclick="openSidebar('Game 2', 'This is the second game placeholder with cinematic presentation.', '2026-03-15', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
+  <div class="game" onclick="openSidebar('Game 2', 'A cinematic, visually stunning experience with intuitive gameplay.', '2026-03-15', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 2">
   </div>
-  <div class="game" onclick="openSidebar('Game 3', 'This is the third game placeholder with immersive description.', '2026-11-20', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
+  <div class="game" onclick="openSidebar('Game 3', 'Our third game immerses players in vibrant, evolving worlds.', '2026-11-20', ['https://via.placeholder.com/300x200', 'https://via.placeholder.com/300x200'])">
     <img src="https://static.vecteezy.com/system/resources/previews/002/480/148/large_2x/question-mark-grunge-textured-hand-drawn-illustration-on-chalkboard-background-vector.jpg" alt="Game 3">
   </div>
 </section>
 
-<section>
-  <h2>Our Mission</h2>
-  <p>At Insight Studios, our mission is to craft unforgettable gaming experiences that push the boundaries of creativity and technology. Every project we develop is driven by passion, innovation, and a relentless pursuit of excellence. Our games combine story, art, and gameplay into seamless experiences. Players can explore, interact, and immerse themselves in worlds we carefully design to be both visually stunning and emotionally resonant.</p>
-</section>
-
-<section>
-  <h2>Vision for the Future</h2>
-  <p>We believe the future of gaming lies in immersive storytelling and interactive design. With cutting-edge tools and artistic vision, we aim to shape new frontiers in the gaming industry, where every player feels part of something larger than themselves. Our commitment to technical excellence ensures smooth performance, while our dedication to narrative depth makes every journey unforgettable. Insight Studios is where imagination meets innovation.</p>
-</section>
-
+<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
   <button class="close-btn" onclick="closeSidebar()">×</button>
   <h2 id="sidebar-title"></h2>
@@ -340,11 +337,11 @@ function closeSidebar() {
 
 function openPanel(type) {
   if(type === 'about') {
-    openSidebar('About Insight Studios', 'Insight Studios creates immersive and visually stunning gaming experiences. Our focus is on innovative gameplay, cinematic storytelling, and technical excellence to craft worlds that captivate players.');
+    openSidebar('About Insight Studios', 'We are a bold, fast-moving startup creating playful, immersive experiences that challenge and delight players.');
   } else if(type === 'contact') {
-    openSidebar('Contact Us', 'Reach out to us via email at Contact-Insight@proton.me for inquiries, collaborations, or general feedback.');
+    openSidebar('Contact Us', 'Reach out via email at Contact-Insight@proton.me for collaborations, feedback, or ideas!');
   } else if(type === 'games') {
-    openSidebar('Games', 'Click on any game cover below to see more details about it.');
+    openSidebar('Games', 'Click on a game below to explore more about it!');
   }
 }
 </script>
