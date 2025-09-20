@@ -17,7 +17,6 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
 
-  /* Background animation */
   body::before {
     content: '';
     position: fixed;
@@ -36,7 +35,6 @@
   }
   @media (max-width: 700px) { body::before { display: none; } }
 
-  /* Header ASCII logo */
   header {
     display: flex;
     justify-content: center;
@@ -45,16 +43,18 @@
     position: relative;
     z-index: 2;
   }
+
   .logo-container {
     position: relative;
     display: inline-block;
     padding: 15px 20px;
-    border: 2px solid rgba(0,0,0,0.4); /* transparent outline */
+    border: 2px solid rgba(0,0,0,0.4);
     border-radius: 15px;
-    background: rgba(0,0,0,0.05); /* subtle solid effect */
+    background: rgba(0,0,0,0.05);
     max-height: 80vh;
     overflow: auto;
   }
+
   .logo-container pre {
     margin: 0;
     font-size: clamp(5px, 1vw, 10px);
@@ -67,11 +67,37 @@
     animation: textGradient 5s infinite linear;
     white-space: pre;
   }
+
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
+
+  /* Mobile-only overlay */
+  .mobile-logo-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 300px;
+    height: 90%;
+    pointer-events: none;
+    background: rgba(0,0,0,0.25);
+    border-radius: 15px;
+    z-index: 3;
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+  }
+  .mobile-logo-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
   @media (max-width: 700px) {
     .logo-container {
       padding: 10px 12px;
@@ -81,9 +107,11 @@
       font-size: clamp(3px, 1.5vw, 6px);
       letter-spacing: -0.3px;
     }
+    .mobile-logo-overlay {
+      display: block;
+    }
   }
 
-  /* Navigation */
   nav {
     display: flex;
     justify-content: center;
@@ -112,7 +140,6 @@
   }
   nav a:hover::after { width: 100%; }
 
-  /* Hero section */
   .hero {
     padding: 100px 20px 60px;
     text-align: center;
@@ -140,7 +167,6 @@
   }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Sections */
   section {
     padding: 80px 20px;
     position: relative;
@@ -158,7 +184,6 @@
   @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   section p { font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto; opacity: 0.85; }
 
-  /* Games grid */
   .games {
     display: flex;
     flex-wrap: wrap;
@@ -180,7 +205,6 @@
   .game:hover { transform: scale(1.08); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
   .game img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0; left: -450px;
@@ -193,7 +217,6 @@
     transition: left 0.6s ease;
     z-index: 3;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
   .sidebar.active { left: 0; }
   .sidebar h2 { margin: 0 0 15px; font-size: 2.4rem; text-align: center; letter-spacing: 0.5px; }
@@ -209,11 +232,9 @@
     cursor: pointer; font-weight: bold; font-size: 1.1rem;
   }
 
-  /* Footer */
   footer { text-align: center; padding: 50px 20px 20px; font-size: 1rem; opacity: 0.6; }
   footer .version { margin-top: 10px; font-size: 0.9rem; opacity: 0.5; }
 
-  /* Mobile responsiveness */
   @media (max-width: 700px) {
     .sidebar { width: 100vw; left: -100vw; padding: 20px; }
     .sidebar.active { left: 0; }
@@ -240,6 +261,9 @@
  ▒ ░   ░   ░ ░ ░  ░  ░   ▒ ░░ ░   ░  ░  ░░ ░  ░      ░  ░  ░    ░       ░░░ ░ ░  ░ ░  ░  ▒ ░░ ░ ░ ▒  ░  ░  ░  
  ░           ░       ░   ░        ░  ░  ░  ░               ░              ░        ░     ░      ░ ░        ░  
     </pre>
+    <div class="mobile-logo-overlay">
+      <img src="https://ibb.co/VWgPTZ26" alt="Mobile Overlay">
+    </div>
   </div>
 </header>
 
@@ -306,12 +330,12 @@ function openSidebar(title, content, releaseDate = '', screenshots = []) {
   });
 
   document.getElementById('sidebar').classList.add('active');
-  document.body.style.overflow = 'hidden'; // lock main page scroll
+  document.body.style.overflow = 'hidden';
 }
 
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('active');
-  document.body.style.overflow = ''; // restore main page scroll
+  document.body.style.overflow = '';
 }
 
 function openPanel(type) {
