@@ -16,16 +16,14 @@
     overflow-x: hidden;
     scroll-behavior: smooth;
   }
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
 
-  /* Subtle animated stars */
+  /* Animated background (desktop only) */
   body::before {
     content: '';
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent),
                 radial-gradient(circle at bottom right, rgba(255,255,255,0.03), transparent);
     pointer-events: none;
@@ -34,9 +32,13 @@
     will-change: transform;
   }
   @keyframes subtleMove {
-    0% { transform: translate(0,0); }
-    50% { transform: translate(20px,20px); }
-    100% { transform: translate(0,0); }
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(10px,10px); }
+  }
+
+  /* Disable background animation on mobile to fix white bar and lag */
+  @media (max-width: 700px) {
+    body::before { display: none; }
   }
 
   /* Header ASCII logo */
@@ -184,8 +186,8 @@
     position: fixed;
     top: 0; left: -380px;
     width: 380px; height: 100%;
-    background: rgba(0,0,0,0.5); /* transparent */
-    backdrop-filter: blur(10px); /* modern glass effect */
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
     padding: 40px 30px;
     box-shadow: 10px 0 60px rgba(0,0,0,0.7);
     transition: left 0.6s ease;
@@ -218,14 +220,15 @@
 
   /* Mobile responsiveness */
   @media (max-width: 700px) {
-    .sidebar { width: calc(100vw - 20px); left: -100vw; padding: 20px 10px; }
+    .sidebar { width: 100vw; left: -100vw; padding: 20px; }
     .sidebar.active { left: 0; }
     .hero h1 { font-size: 2.5rem; }
     .hero p { font-size: 1.1rem; }
     .game { width: 45%; height: 280px; }
     .sidebar .screenshots img { width: 100%; }
+    /* Reduce animations for mobile */
+    .hero h1, section h2 { animation: none !important; text-shadow: none; }
   }
-
 </style>
 </head>
 <body>
@@ -288,7 +291,7 @@
 
 <footer>
   © 2025 Insight Studios. All rights reserved.
-  <div class="version">Website Version V1.1</div>
+  <div class="version">Website Version V1.2</div>
 </footer>
 
 <script>
