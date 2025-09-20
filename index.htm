@@ -50,8 +50,8 @@
   }
   header pre {
     margin: 0;
-    font-size: 12px;
-    line-height: 12px;
+    font-size: clamp(6px, 1.5vw, 12px);
+    line-height: clamp(6px, 1.5vw, 12px);
     letter-spacing: -1px;
     padding: 10px;
     display: inline-block;
@@ -61,6 +61,7 @@
     -webkit-text-fill-color: transparent;
     animation: textGradient 5s infinite linear;
     overflow-x: auto;
+    white-space: pre-wrap; /* allow wrapping on mobile */
   }
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
@@ -192,7 +193,8 @@
     box-shadow: 10px 0 60px rgba(0,0,0,0.7);
     transition: left 0.6s ease;
     z-index: 3;
-    overflow-y: auto;
+    overflow-y: auto; /* independent scrolling */
+    overscroll-behavior: contain; /* prevent scroll bubbling */
   }
   .sidebar.active { left: 0; }
   .sidebar h2 { margin: 0 0 10px; font-size: 2.2rem; text-align: center; letter-spacing: 0.5px; }
@@ -226,7 +228,6 @@
     .hero p { font-size: 1.1rem; }
     .game { width: 45%; height: 280px; }
     .sidebar .screenshots img { width: 100%; }
-    /* Reduce animations for mobile */
     .hero h1, section h2 { animation: none !important; text-shadow: none; }
   }
 </style>
@@ -291,7 +292,7 @@
 
 <footer>
   © 2025 Insight Studios. All rights reserved.
-  <div class="version">Website Version V1.2</div>
+  <div class="version">Website Version V1.4</div>
 </footer>
 
 <script>
@@ -325,6 +326,11 @@ function openPanel(type) {
     openSidebar('Games', 'Click on any game cover below to see more details about it.');
   }
 }
+
+/* Prevent sidebar scroll from affecting body scroll */
+const sidebar = document.getElementById('sidebar');
+sidebar.addEventListener('touchstart', e => { e.stopPropagation(); }, { passive: true });
+sidebar.addEventListener('touchmove', e => { e.stopPropagation(); }, { passive: true });
 </script>
 
 </body>
