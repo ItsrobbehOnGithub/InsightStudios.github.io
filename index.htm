@@ -38,25 +38,35 @@
 
   /* Header ASCII logo */
   header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     position: relative;
     z-index: 2;
   }
-  header pre {
-    margin: 0;
-    font-size: clamp(6px, 1.5vw, 12px);
-    line-height: clamp(6px, 1.5vw, 12px);
-    letter-spacing: -1px;
-    padding: 10px;
+
+  .logo-container {
+    position: relative;
     display: inline-block;
+    padding: 10px 15px;
+    border: 2px solid rgba(0,0,0,0.4); /* transparent outline */
+    border-radius: 15px;
+    background: rgba(0,0,0,0.05); /* subtle solid effect */
+  }
+
+  .logo-container pre {
+    margin: 0;
+    font-size: clamp(5px, 1.2vw, 10px);
+    line-height: clamp(5px, 1.2vw, 10px);
+    letter-spacing: -1px;
     font-family: 'Courier New', monospace;
     background: linear-gradient(90deg, #ff00c0, #8a2be2, #00c0ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: textGradient 5s infinite linear;
-    overflow-x: auto;  /* horizontal scroll if needed */
-    white-space: pre;  /* prevent wrapping */
+    white-space: pre;
+    overflow-x: auto;
   }
   @keyframes textGradient {
     0% { background-position: 0% 50%; }
@@ -64,8 +74,8 @@
     100% { background-position: 0% 50%; }
   }
   @media (max-width: 700px) {
-    header pre {
-      font-size: clamp(4px, 2vw, 8px);
+    .logo-container pre {
+      font-size: clamp(4px, 1.5vw, 7px);
       letter-spacing: -0.5px;
     }
   }
@@ -215,7 +225,8 @@
 <body>
 
 <header>
-<pre>
+  <div class="logo-container">
+    <pre>
  ██▓ ███▄    █   ██████  ██▓  ▄████  ██░ ██ ▄▄▄█████▓  ██████ ▄▄▄█████▓ █    ██ ▓█████▄  ██▓ ▒█████    ██████ 
 ▓██▒ ██ ▀█   █ ▒██    ▒ ▓██▒ ██▒ ▀█▒▓██░ ██▒▓  ██▒ ▓▒▒██    ▒ ▓  ██▒ ▓▒ ██  ▓██▒▒██▀ ██▌▓██▒▒██▒  ██▒▒██    ▒ 
 ▒██▒▓██  ▀█ ██▒░ ▓██▄   ▒██▒▒██░▄▄▄░▒██▀▀██░▒ ▓██░ ▒░░ ▓██▄   ▒ ▓██░ ▒░▓██  ▒██░░██   █▌▒██▒▒██░  ██▒░ ▓██▄   
@@ -225,7 +236,9 @@
  ▒ ░░ ░░   ░ ▒░░ ░▒  ░ ░ ▒ ░  ░   ░  ▒ ░▒░ ░    ░    ░ ░▒  ░ ░    ░    ░░▒░ ░ ░  ░ ▒  ▒  ▒ ░  ░ ▒ ▒░ ░ ░▒  ░ ░
  ▒ ░   ░   ░ ░ ░  ░  ░   ▒ ░░ ░   ░  ░  ░░ ░  ░      ░  ░  ░    ░       ░░░ ░ ░  ░ ░  ░  ▒ ░░ ░ ░ ▒  ░  ░  ░  
  ░           ░       ░   ░        ░  ░  ░  ░               ░              ░        ░     ░      ░ ░        ░  
-</pre>
+...
+    </pre>
+  </div>
 </header>
 
 <nav>
