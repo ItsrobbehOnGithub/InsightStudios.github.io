@@ -185,6 +185,8 @@
     .game { width: 45%; height: 280px; }
     .sidebar { width: 100vw; left: -100vw; padding: 20px; }
     .sidebar.active { left: 0; }
+    html, body { cursor: auto; } /* Show system cursor on mobile */
+    .cursor, .cursor-trail { display: none !important; }
   }
 
   /* Custom Cursor */
@@ -252,7 +254,7 @@
   </div>
   <div class="liquid-box">
     <h3>Design Meets Play</h3>
-    <p>Our games combine stunning visuals and intuitive mechanics to keep players engaged, entertained, and coming back for more.</p>
+    <p>Our games combine stunning visuals and intuitive mechanics to keep players engaged, entertained, and coming back for more
   </div>
   <div class="liquid-box">
     <h3>Community-Driven</h3>
@@ -297,7 +299,7 @@
 
 <footer>
   <p>© 2025 Insight Studios. All rights reserved.</p>
-  <p class="version">Version 1.2.1
+  <p class="version">Version 1.2.2
 </footer>
 
 <script>
@@ -412,35 +414,46 @@
     });
   });
 
-  /* Custom Cursor */
-  (function(){
-    const cursor = document.querySelector('.cursor');
-    const trailContainer = document.querySelector('.cursor-trail');
-    const trailLength = 10;
-    const trail = [];
-    for(let i=0;i<trailLength;i++){
-      const span = document.createElement('span');
-      trailContainer.appendChild(span);
-      trail.push({el:span, x:0, y:0});
-    }
-    let mouseX=0, mouseY=0;
-    document.addEventListener('mousemove', e=>{
-      mouseX=e.clientX;
-      mouseY=e.clientY;
-      cursor.style.transform = `translate(${mouseX}px,${mouseY}px)`;
+/* Custom Cursor */
+(function(){
+  // Skip custom cursor on touch devices or small screens
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 700) {
+    return;
+  }
+
+  const cursor = document.querySelector('.cursor');
+  const trailContainer = document.querySelector('.cursor-trail');
+  const trailLength = 10;
+  const trail = [];
+
+  for (let i = 0; i < trailLength; i++) {
+    const span = document.createElement('span');
+    trailContainer.appendChild(span);
+    trail.push({ el: span, x: 0, y: 0 });
+  }
+
+  let mouseX = 0, mouseY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.transform = `translate(${mouseX}px,${mouseY}px)`;
+  });
+
+  function animateTrail(){
+    let x = mouseX, y = mouseY;
+    trail.forEach(p => {
+      p.x += (x - p.x) * 0.25;
+      p.y += (y - p.y) * 0.25;
+      p.el.style.transform = `translate(${p.x}px,${p.y}px)`;
+      x = p.x;
+      y = p.y;
     });
-    function animateTrail(){
-      let x = mouseX, y = mouseY;
-      trail.forEach(p=>{
-        p.x += (x-p.x)*0.25;
-        p.y += (y-p.y)*0.25;
-        p.el.style.transform = `translate(${p.x}px,${p.y}px)`;
-        x=p.x; y=p.y;
-      });
-      requestAnimationFrame(animateTrail);
-    }
-    animateTrail();
-  })();
+    requestAnimationFrame(animateTrail);
+  }
+
+  animateTrail();
+})();
 </script>
 
 </body>
