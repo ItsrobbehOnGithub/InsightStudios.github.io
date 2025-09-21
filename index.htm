@@ -202,6 +202,15 @@
     -webkit-text-fill-color: transparent;
     animation: glowPulse 3s infinite ease-in-out;
   }
+
+  /* Particle canvas */
+  #particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    border-radius: 12px;
+  }
 </style>
 </head>
 <body>
@@ -278,14 +287,17 @@
   <div id="sidebar-content-wrap" class="neon-wrap">
     <p id="sidebar-content">Content</p>
     <p id="sidebar-release"></p>
-    <img id="sidebar-cover" src="" alt="" style="width:100%; border-radius:12px; margin-top:15px;">
+    <div style="position:relative;">
+      <img id="sidebar-cover" src="" alt="" style="width:100%; border-radius:12px; margin-top:15px; display:block;">
+      <canvas id="particleCanvas"></canvas>
+    </div>
     <iframe id="sidebar-video" width="100%" height="200" style="margin-top:15px; border:none;" allowfullscreen></iframe>
   </div>
 </div>
 
 <footer>
   <p>© 2025 Insight Studios. All rights reserved.</p>
-  <p class="version">Version 1.2.0
+  <p class="version">Version 1.2.1
 </footer>
 
 <script>
@@ -296,6 +308,39 @@
   const sidebarCover = document.getElementById('sidebar-cover');
   const sidebarVideo = document.getElementById('sidebar-video');
   const contentWrap = document.getElementById('sidebar-content-wrap');
+  const particleCanvas = document.getElementById('particleCanvas');
+  const ctx = particleCanvas.getContext('2d');
+  let particles = [], width, height;
+
+  function initParticles() {
+    if(!sidebar.classList.contains('active') || sidebarTitle.innerText !== "Top-Down Heist") return;
+    width = particleCanvas.width = sidebarCover.clientWidth;
+    height = particleCanvas.height = sidebarCover.clientHeight;
+    particles = [];
+    const spacing = 20;
+    for(let x=0;x<width;x+=spacing){
+      for(let y=0;y<height;y+=spacing){
+        particles.push({x, y});
+      }
+    }
+    animateParticles();
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0,0,width,height);
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    const speed = 0.5;
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2);
+      ctx.fill();
+      p.x += speed;
+      p.y += speed;
+      if(p.x>width) p.x=0;
+      if(p.y>height) p.y=0;
+    });
+    requestAnimationFrame(animateParticles);
+  }
 
   function openSidebar(title, content, releaseDate = '', screenshots = [], videoUrl = '') {
     sidebarTitle.innerText = title;
@@ -307,6 +352,7 @@
       sidebar.classList.add('active','neon');
       contentWrap.classList.add('neon-wrap');
       sidebarRelease.innerHTML = 'Release: <s>Coming Soon</s> Eventually <span style="font-size:0.7em; opacity:0.6">whenever I feel like it</span>';
+      setTimeout(initParticles, 50);
     } else {
       sidebar.classList.add('active');
       sidebar.classList.remove('neon');
@@ -320,6 +366,7 @@
     contentWrap.classList.remove('neon-wrap');
     sidebarVideo.src = '';
     sidebarCover.src = '';
+    ctx.clearRect(0,0,particleCanvas.width, particleCanvas.height);
     document.body.style.overflow = '';
   }
 
