@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insight Studios</title>
 <style>
+    * {
+      cursor: none !important;
+    }
+    
   html, body {
     margin: 0;
     padding: 0;
@@ -301,7 +305,7 @@
 
 <footer>
   <p>© 2025 Insight Studios. All rights reserved.</p>
-  <p class="version">Version 1.2.
+  <p class="version">Version 1.2.6
 </footer>
 
 <script>
@@ -426,6 +430,9 @@
   const trailLength = 10;
   const trail = [];
 
+  // Hide default cursor
+  document.body.style.cursor = 'none';
+
   for (let i = 0; i < trailLength; i++) {
     const span = document.createElement('span');
     trailContainer.appendChild(span);
@@ -434,10 +441,20 @@
 
   let mouseX = 0, mouseY = 0;
 
+  // Detect hover over clickable elements
+  const clickableSelectors = 'a, button, [onclick], input, textarea';
+  let isHoveringClickable = false;
+
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    cursor.style.transform = `translate(${mouseX}px,${mouseY}px)`;
+    cursor.style.transform = `translate(${mouseX}px,${mouseY}px) scale(${isHoveringClickable ? 1.5 : 1})`;
+  });
+
+  // Check if hovering a clickable element
+  document.addEventListener('mousemove', e => {
+    const target = e.target.closest(clickableSelectors);
+    isHoveringClickable = !!target;
   });
 
   function animateTrail(){
@@ -445,7 +462,7 @@
     trail.forEach(p => {
       p.x += (x - p.x) * 0.25;
       p.y += (y - p.y) * 0.25;
-      p.el.style.transform = `translate(${p.x}px,${p.y}px)`;
+      p.el.style.transform = `translate(${p.x}px,${p.y}px) scale(${isHoveringClickable ? 1.2 : 1})`;
       x = p.x;
       y = p.y;
     });
@@ -455,6 +472,7 @@
   animateTrail();
 })();
 </script>
+
 
 
 </body>
