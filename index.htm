@@ -167,7 +167,9 @@
     background: rgba(0,0,0,0.2);
   }
   .neon-wrap p, .neon-wrap h3 {
-    text-shadow: 0 0 4px #ff00c0, 0 0 8px #8a2be2, 0 0 12px #00c0ff;
+    text-shadow:  0 0 4px #ff0000,   /* inner red glow */
+        0 0 8px #ff1a1a,   /* medium red glow */
+        0 0 12px #ff4d4d;  /* outer red glow */
   }
   @keyframes neonGradientPulse {
     0%, 100% { box-shadow: 0 0 15px #ff00c0, 0 0 30px #8a2be2, 0 0 45px #00c0ff; }
@@ -299,7 +301,7 @@
 
 <footer>
   <p>© 2025 Insight Studios. All rights reserved.</p>
-  <p class="version">Version 1.2.2
+  <p class="version">Version 1.2.
 </footer>
 
 <script>
@@ -416,10 +418,8 @@
 
 /* Custom Cursor */
 (function(){
-  // Skip custom cursor on touch devices or small screens
-  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 700) {
-    return;
-  }
+  // Only run cursor on screens wider than 700px
+  if (window.innerWidth <= 700) return;
 
   const cursor = document.querySelector('.cursor');
   const trailContainer = document.querySelector('.cursor-trail');
@@ -455,6 +455,7 @@
   animateTrail();
 })();
 </script>
+
 
 </body>
 </html>
